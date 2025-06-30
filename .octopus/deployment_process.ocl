@@ -20,3 +20,25 @@ step "deploy-kubernetes-yaml" {
         worker_pool = "hosted-ubuntu"
     }
 }
+
+step "delete-joe-test" {
+    name = "delete joe-test"
+    properties = {
+        Octopus.Action.TargetRoles = "joe-test-octopus-clusters"
+    }
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                kubectl delete namespace joe-test --ignore-not-found=true
+                
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool_variable = ""
+    }
+}
