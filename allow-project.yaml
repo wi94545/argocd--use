@@ -6,11 +6,13 @@ metadata:
 spec:
   description: 測試project
   sourceRepos:
-  - https://github.com/wi94545/argocd--use
+  - 'https://github.com/wi94545/argocd--use'
   destinations:
   - namespace: joe-test
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
   clusterResourceAllowList:
+  - group: argoproj.io
+    kind: AppProject
   - group: '*'
     kind: '*'
   namespaceResourceAllowList:
