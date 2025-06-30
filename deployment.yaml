@@ -34,7 +34,7 @@ data:
     <html>
       <head><title>Argo CD Static Web</title></head>
       <body>
-        <h1>Hello from Argo CD deployed static HTML! is my test </h1>
+        <h1>Hello from Argo CD deployed static HTML! is my test222 </h1>
       </body>
     </html>
 ---
