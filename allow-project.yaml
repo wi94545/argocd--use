@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: joe-argocd
+  namespace: argocd
+spec:
+  description: 測試project
+  sourceRepos:
+  - https://github.com/wi94545/argocd--use
+  destinations:
+  - namespace: joe-test
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+
