@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-web
+  template:
+    metadata:
+      labels:
+        app: static-web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: web-content
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: web-content
+        configMap:
+          name: web-html
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-html
+data:
+  index.html: |
+    <html>
+      <head><title>Argo CD Static Web</title></head>
+      <body>
+        <h1>Hello from Argo CD deployed static HTML!</h1>
+      </body>
+    </html>
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-web
+spec:
+  type: LoadBalancer
+  selector:
+    app: static-web
+  ports:
+  - port: 80
+    targetPort: 80
+
