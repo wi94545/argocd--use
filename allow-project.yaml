@@ -10,10 +10,10 @@ spec:
   destinations:
   - namespace: joe-test
     server: https://kubernetes.default.svc
-  clusterResourceWhitelist:
+  clusterResourceAllowList:
   - group: '*'
     kind: '*'
-  namespaceResourceWhitelist:
+  namespaceResourceAllowList:
   - group: '*'
     kind: '*'
 
